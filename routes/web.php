@@ -14,10 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//rota pagina inicial
 Route::get('/', [PhotoController::class,'index']);
 
-Route::get('/photos/new', function (){
-  return view('pages/photo_form');
-});
+//rota que exibe o formulario de cadastro
+Route::get('/photos/new', [PhotoController::class,'create']);
+
+//rota que insere no banco de dados uma nova foto
+Route::post('/photos', [PhotoController::class,'store']);
 
 

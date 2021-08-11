@@ -94,6 +94,7 @@ class PhotoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //retorna uma foto do banco de dados
         $photo = Photo::findOrFail($request->id);
 
         $photo->title = $request->title;
@@ -104,7 +105,7 @@ class PhotoController extends Controller
         //alterando no banco de dados
         $photo->update();
 
-        //redirecionar pata a pagina
+        //redirecionar para a pagina
         return redirect('/photos');
     }
 
@@ -114,8 +115,13 @@ class PhotoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+    public function deletePhoto($id)
+  {
+    //Retorna a foto do banco de dados
+    $photo = Photo::findOrFail($id)->delete();
+
+    //Redirecionar para a página de Fotos
+    return redirect('/photos');
+  }
 }
+

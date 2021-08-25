@@ -52,10 +52,28 @@ class PhotoController extends Controller
         $photo->title = $request->title;
         $photo->date = $request->date;
         $photo->description = $request->description;
-        $photo->photo_url = "teste";
 
-        //inserindo no banco de dados para a pagina inicial
-        $photo->save();
+        //upload
+        if($request->hasFile('photo') && $request->file('photo')){
+          //define um nome aleatorio para imagem baseado em data e hora atual
+          $nomeFoto = uniqid(date('HisYmd'));
+
+          //recupera a extensão do arquivo
+          $extensao = $request->photo->extension();
+
+          //nome do arquivo com extensao
+          $nomeArquivo = "{$nomeFoto}.{$extensao}";
+
+          //upload
+          $upload = $request->photo->move(public_path('/storage/photos'),$nomeArquivo);
+
+          $photo->photo_url = $nomeArquivo;
+        }
+
+        if($upload){
+          //inserindo no banco de dados
+          $photo->save();
+        }
 
         //redirecionar pata a pagina
         return redirect('/');

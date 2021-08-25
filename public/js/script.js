@@ -13,3 +13,16 @@
    //Alterando o Action(rota) do formulário
    form.action = "/photos/"+button.getAttribute('data-photo-id')
  })
+
+ //Carregar imagem
+ function loadFile(event){
+
+  //variavel que recebo o elemento img
+  var imgPrev = document.getElementById("imgPrev")
+
+  //link para a omagem
+  var url = URL.createObjectURL(event.target.files[0])
+
+  //altera a propriedade src para o link da imagem
+  imgPrev.src = url
+}

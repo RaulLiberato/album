@@ -29,6 +29,16 @@
               </tr>
             </thead>
             <tbody>
+
+              @if ($photos->isEmpty())
+                <tr>
+                  <td colspan="5" calss="p-5">
+                    <h1 class="display-4 text-secondary">Nenhuma foto cadastrada</h1>
+                    <i class="far fa-frown"></i>
+                  </td>
+                </tr>
+              @endif
+
               @foreach ($photos as $photo)
                 <tr>
                   <td>{{$photo->id}}</td>

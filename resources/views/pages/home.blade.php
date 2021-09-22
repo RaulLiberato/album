@@ -3,6 +3,7 @@
 @section('content')
 
 <header class="text-white gradient">
+
 @include('/partials/navbar')
 
   <div class="jumbotron bg-transparent text-center py-5">
@@ -22,7 +23,17 @@
 </header>
 
 <section class="container mt-4">
+
+
   <div class="row">
+
+    @if ($photos->isEmpty())
+      <div class="col-12 text-center p-5">
+        <h1 class="display-4 text-secondary">Nenhuma foto cadastrada</h1>
+        <i class="far fa-frown"></i>
+      </div>
+    @endif
+
     @foreach ($photos as $photo)
     <div class="col-12 col-md-6 col-lg-4 mb-4">
       <div class="card shadow-sm h-100">
